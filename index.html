@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Store Screenshot Resizer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <p class="eyebrow">App Store Connect</p>
+        <h1>App Store用スクリーンショットを受け付けサイズに整える</h1>
+        <p class="hero-copy">
+          iPhone、iPad、Apple Watch のスクリーンショットを読み込んで、
+          ドラッグで位置調整、ズームでトリミング。そのまま accepted size の PNG として保存できます。
+        </p>
+      </section>
+
+      <section class="workspace">
+        <aside class="controls">
+          <div class="panel">
+            <label id="dropZone" class="file-picker" aria-label="画像をドラッグアンドドロップ">
+              <input id="imageInput" type="file" accept="image/png,image/jpeg,image/jpg" />
+              <span id="dropZoneLabel">スクリーンショットを選ぶ</span>
+            </label>
+            <p class="hint">PNG / JPG 対応。ここへドラッグ&ドロップするか、クリックして選びます。</p>
+          </div>
+
+          <div class="panel">
+            <label for="presetSelect">サイズプリセット</label>
+            <select id="presetSelect"></select>
+            <div class="meta-grid">
+              <div>
+                <span class="meta-label">出力サイズ</span>
+                <strong id="outputSize">-</strong>
+              </div>
+              <div>
+                <span class="meta-label">向き</span>
+                <strong id="orientationLabel">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <label for="zoomRange">ズーム</label>
+            <input id="zoomRange" type="range" min="1" max="4" step="0.01" value="1" />
+            <div class="button-row">
+              <button id="fitButton" type="button">フィット</button>
+              <button id="centerButton" type="button">中央に戻す</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="button-row">
+              <button id="downloadButton" type="button" class="primary" disabled>
+                PNGを書き出す
+              </button>
+            </div>
+            <p id="statusText" class="status">
+              画像を読み込むとここに状態が表示されます。
+            </p>
+          </div>
+
+          <div class="panel note">
+            <h2>収録プリセット</h2>
+            <ul>
+              <li>Apple Watch Series 11 portrait: 416 × 496</li>
+              <li>iPhone 17 Pro Max portrait: 1320 × 2868</li>
+              <li>iPhone 17 Pro Max landscape: 2868 × 1320</li>
+              <li>13" iPad portrait: 2064 × 2752</li>
+              <li>13" iPad landscape: 2752 × 2064</li>
+              <li>12.9" iPad portrait: 2048 × 2732</li>
+              <li>12.9" iPad landscape: 2732 × 2048</li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="stage-area">
+          <div class="stage-header">
+            <div>
+              <p class="stage-title">プレビュー</p>
+              <p class="stage-subtitle">キャンバス上でドラッグして切り抜き位置を調整します。</p>
+            </div>
+            <div class="source-meta">
+              <span>元画像</span>
+              <strong id="sourceSize">未選択</strong>
+            </div>
+          </div>
+          <div id="canvasFrame" class="canvas-frame">
+            <canvas id="previewCanvas" width="900" height="1200"></canvas>
+            <div id="emptyState" class="empty-state">
+              <p>ここにプレビューが表示されます</p>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
